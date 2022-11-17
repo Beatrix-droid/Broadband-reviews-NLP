@@ -44,40 +44,44 @@ def obtain_lists(index: int, list_to_put_it_in: list) -> None:
 
 
 #use this loop to process the text reviews. Extract and clean them from the unnecessary html tags
-soup=scrape_data(1)
-reviews = soup.find_all("li")
 
-for index, review in enumerate(reviews):
-    try:
+
+for i in range(1, 50):
+    soup=scrape_data(i)
+    reviews = soup.find_all("li")
+
+    for index, review in enumerate(reviews):
+        try:
+            
+            comment= review.find("blockquote", class_="medium").text
+            comment=comment.replace("\n", "")
+            comment=comment.strip()
+
+            comments.append(comment)
+            date=review.find("dd", itemprop="datePublished")
         
-        comment= review.find("blockquote", class_="medium").text
-        comment=comment.replace("\n", "")
-        comment=comment.strip()
+            date=date.replace("\t", "")
+            date=date.replace("\n","")
+            dates.append(date)
+    
+        except:
+            pass
 
-        comments.append(comment)
-        date=review.find("dd", itemprop="datePublished")
-     
-        date=date.replace("\t", "")
-        date=date.replace("\n","")
-        dates.append(date)
-  
-    except:
-        pass
+    #this main loop will go through all the different ratings gathered in teh she soup
+    ratings=soup.find_all("ul", class_="ratings")
 
-#this main loop will go through all the different ratings gathered in teh she soup
-ratings=soup.find_all("ul", class_="ratings")
+    for index, rating in enumerate(ratings):
+        rating = rating.find_all("li")
 
-for index, rating in enumerate(ratings):
-    rating = rating.find_all("li")
+        obtain_lists(0, satisfaction_reviews)
+        if len(rating)>1:
+            obtain_lists(1, customer_service_reviews)
 
-    obtain_lists(0, satisfaction_reviews)
-    obtain_lists(1, customer_service_reviews)
+        if len(rating)>2:
+            obtain_lists(2, speed_reviews)
 
-    if len(rating)>2:
-        obtain_lists(2, speed_reviews)
-
-    if len(rating)>3:
-        obtain_lists(3, reliability_reviews)
+        if len(rating)>3:
+            obtain_lists(3, reliability_reviews)
 
 #first item of the list is a bit off so delete it 
 del customer_service_reviews[0]
@@ -86,8 +90,5 @@ del speed_reviews[0]
 del reliability_reviews[0]
 
 
-print(len(satisfaction_reviews))
-print(len(reliability_reviews))
-print(len(customer_service_reviews))
-print(len(speed_reviews))
+print(len(comments))
 
