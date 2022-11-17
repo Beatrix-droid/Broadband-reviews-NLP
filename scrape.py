@@ -5,8 +5,15 @@ import requests
 from bs4 import BeautifulSoup
 
 
-#base url
+#base url from which to construct the one used by scraping function
 BASE_URL="https://www.broadband.co.uk/broadband/providers/virgin-media/reviews/page:"
+
+
+#modify headers to prevent getting blocked by website
+HEADERS={"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0",
+"Accept-Language":  "en-GB,en;q=0.8",
+"Referer": "https://google.com",
+"DNT":"1"}
 
 stars=[]
 comments=[]
@@ -23,7 +30,7 @@ def scrape_data(page_number:int)-> BeautifulSoup:
     """returns an instance of the beatiful soup with the data scraped from the specified page"""
 
     url= BASE_URL +str(page_number)
-    html_text=requests.get(url).text
+    html_text=requests.get(url, headers=HEADERS).text
 
     soup = BeautifulSoup(html_text, 'html.parser')
     return soup
