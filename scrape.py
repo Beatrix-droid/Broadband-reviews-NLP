@@ -49,6 +49,7 @@ def obtain_lists(index: int, list_to_put_it_in: list) -> None:
 for i in range(1, 50):
     soup=scrape_data(i)
     reviews = soup.find_all("li")
+   
 
     for index, review in enumerate(reviews):
         try:
@@ -58,8 +59,7 @@ for i in range(1, 50):
             comment=comment.strip()
 
             comments.append(comment)
-            date=review.find("dd", itemprop="datePublished")
-        
+            date=review.find("dd", itemprop="datePublished").text
             date=date.replace("\t", "")
             date=date.replace("\n","")
             dates.append(date)
@@ -84,11 +84,12 @@ for i in range(1, 50):
             obtain_lists(3, reliability_reviews)
 
 #first item of the list is a bit off so delete it 
+
 del customer_service_reviews[0]
 del satisfaction_reviews[0]
 del speed_reviews[0]
 del reliability_reviews[0]
 
 
-print(len(comments))
+
 
