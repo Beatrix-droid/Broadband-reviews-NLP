@@ -5,6 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
+
 #base url from which to construct the one used by scraping function
 BASE_URL="https://www.broadband.co.uk/broadband/providers/virgin-media/reviews/page:"
 
