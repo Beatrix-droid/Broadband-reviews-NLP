@@ -28,7 +28,7 @@ reliability_reviews=[]
 
 def scrape_data(page_number:int)-> BeautifulSoup:
     
-    """returns an instance of the beatiful soup with the data scraped from the specified page"""
+    """returns an instance of the beautiful soup with the data scraped from the specified page"""
 
     url= BASE_URL +str(page_number)
     html_text=requests.get(url, headers=HEADERS).text
@@ -54,7 +54,7 @@ def obtain_lists(index: int, list_to_put_it_in: list) -> None:
 #use this loop to process the text reviews. Extract and clean them from the unnecessary html tags
 
 
-for i in range(1, 50):
+for i in range(1, 110):
     soup=scrape_data(i)
     reviews = soup.find_all("li")
    
