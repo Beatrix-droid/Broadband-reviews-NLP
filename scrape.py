@@ -3,9 +3,12 @@ from __future__ import annotations #for better type hints
 
 import requests
 from bs4 import BeautifulSoup
+from urllib.parse import urlencode
+import os
+from dotenv import load_dotenv
 
 
-
+load_dotenv()
 #base url from which to construct the one used by scraping function
 BASE_URL="https://www.broadband.co.uk/broadband/providers/virgin-media/reviews/page:"
 
@@ -25,12 +28,16 @@ satisfaction_reviews=[]
 speed_reviews=[]
 reliability_reviews=[]
 
+list_of_urls = ['http://quotes.toscrape.com/page/1/', 'http://quotes.toscrape.com/page/2/']
 
+ 
 def scrape_data(page_number:int)-> BeautifulSoup:
     
     """returns an instance of the beautiful soup with the data scraped from the specified page"""
 
     url= BASE_URL +str(page_number)
+    params = {'api_key': os.getenv("API_KEY"), 'url': url}
+    html_text = requests.get('http://api.scraperapi.com/', params=urlencode(params))
     html_text=requests.get(url, headers=HEADERS).text
 
     soup = BeautifulSoup(html_text, 'html.parser')
