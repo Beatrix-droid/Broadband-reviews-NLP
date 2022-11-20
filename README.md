@@ -15,3 +15,6 @@ the structure of the files in the project is teh following:
 * preprocessing_part2.ipynb takes the data from the preprocessed_data.csv, adds a new column called "Average Score" that displays the average score per each review and eliminates the "date column" as that is unneeded for this machine learning project. It creates a file suitable for the model to take as an  imput called "data_ready_for_model.csv".
 
 * model_creation.ipynb is where the neural network is actually built. Processed data from preprocessing_part2.ipynb is taken and used to build and train a text classifier model that will read the comments in the datatable and try to predict its average score.
+
+*frontend.py serves the streamlit web app with which the user can interact with the model
+./streamlit/config.toml contains the styling configurations of the application of the frontend streamlit app.
