@@ -6,7 +6,7 @@ These reviews were scraped using the scrape.py script.
 
 the structure of the files in the project is teh following:
 
-* the data folder contains all the data in forms of csv files in all its different stages of processing
+* /data contains all the data in forms of csv files in all its different stages of processing
 
 * scrape.py scrapes the data off of the internet, and puts it into a csv called "raw_data.csv" 
 
@@ -16,5 +16,7 @@ the structure of the files in the project is teh following:
 
 * model_creation.ipynb is where the neural network is actually built. Processed data from preprocessing_part2.ipynb is taken and used to build and train a text classifier model that will read the comments in the datatable and try to predict its average score.
 
-*frontend.py serves the streamlit web app with which the user can interact with the model
+* Saved_model is the folder that contains the model
+
+* frontend.py serves the streamlit web app with which the user can interact with the model
 ./streamlit/config.toml contains the styling configurations of the application of the frontend streamlit app.
