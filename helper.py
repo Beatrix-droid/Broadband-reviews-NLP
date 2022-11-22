@@ -59,6 +59,6 @@ def decode_output(model_output: list[int]) -> str:
     
     """Decodes the output of the model and converts it back to text."""
 
-    results= {"Probability: ": np.max(model_output[0]), "Classified: ":  class_names[np.argmax(model_output[0])], "Probability Array": model_output[0]}
+    results= {"Probability": np.max(model_output[0]), "Classified":  class_names[np.argmax(model_output[0])], "Probability Array": model_output[0]}
 
     return results

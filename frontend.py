@@ -33,14 +33,14 @@ with st.form(key='my_form'):
 
         #decode results and display them on page
         results= decode_output(model_output)
-        #   results= {"Probability: ": np.max(model_output[0]), "Classified: ":  class_names[np.argmax(model_output[0])], "Probability Array": model_output[0]}
 
-        st.write(f"Review rating: {results['Classified']}")
-        st.write(f" Confidence: {results['Probability']}")
+        rating=results["Classified"]
+        confidence=results["Probability"]
+        probability_array= results["Probability Array"]
 
+        st.write(f"Review rating: {rating}")
+        st.write(f" Confidence: {confidence}")
+        st.write(f"Rest of probabilities: {probability_array}" )
 
-
-
-
-
+st.write('[github link to the code]("https://github.com/Beatrix-droid/Broadband-reviews-NLP")')
 
