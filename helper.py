@@ -2,6 +2,8 @@ import re
 from gensim.parsing.preprocessing import remove_stopwords #to remove common words
 from nltk.stem import WordNetLemmatizer
 import numpy as np
+import tensorflow as tf
+
 
 lemmatizer = WordNetLemmatizer()
 
@@ -10,6 +12,13 @@ REPLACE_BY_SPACE_RE = re.compile('[/(){}\[\]\|@,;]')
 remove_chars=re.compile('/[!@#$%^&*]/g')
 lables={"Bad": 1, "Mediocre":2 ,"Satisfactory":3, "Good":4}
 class_names = list(lables.keys())
+
+#max words to be used.
+MAX_WORDS=5000 
+#max no of words per complaint:
+MAX_SEQUENCE=250
+#fixed
+EMBEDDING_DIM=250
 
 
 def clean_text(text: str) -> str:
@@ -31,6 +40,19 @@ def remove_non_ascii(string: str) -> str:
     """Removes non ascii characters"""
 
     return ''.join(char for char in string if ord(char) < 128)
+
+
+def encode_text(text: str):
+   
+    """Make prediction based on user input"""
+
+
+    tokenizer = tf.keras.preprocessing.text.Tokenizer(num_words=MAX_WORDS)
+    tokenizer.fit_on_texts(text)
+
+    model_input = tokenizer.texts_to_sequences(text) 
+    model_input = tf.keras.utils.pad_sequences(model_input, maxlen=MAX_SEQUENCE)
+    return model_input
 
 
 def decode_output(model_output: list[int]) -> str:

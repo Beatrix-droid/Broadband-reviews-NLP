@@ -5,8 +5,8 @@ from helper import *
 
 #helper imports to preprocess text for model
 
-@st.cache  #to increase performance
-def load_model():
+@st.cache(allow_output_mutation=True) #to increase performance
+def grab_model():
     model=load_model("saved_model/model1")#load saved model
     return model
 
@@ -20,18 +20,24 @@ st.info("""Welcome to the broadband review classifier! Please enter the review y
 with st.form(key='my_form'):
     text= st.text_area('Enter the review you wish to classify:')
     button=st.form_submit_button('Classify this Review')
-    
+   
     if text and button:
         #process text
         text=clean_text(text)
         text=remove_non_ascii(text)
+        model_input=encode_text(text)
      
         #feed into model
-        model_output= model.predict(text)
+        model=grab_model()
+        model_output= model.predict(model_input)
 
         #decode results and display them on page
         results= decode_output(model_output)
-        st.write(f"{results}")
+        #   results= {"Probability: ": np.max(model_output[0]), "Classified: ":  class_names[np.argmax(model_output[0])], "Probability Array": model_output[0]}
+
+        st.write(f"Review rating: {results['Classified']}")
+        st.write(f" Confidence: {results['Probability']}")
+
 
 
 
