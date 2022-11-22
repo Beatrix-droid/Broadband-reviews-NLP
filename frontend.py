@@ -1,34 +1,14 @@
 import streamlit as st
 from keras.models import load_model
-import os
+from helper import *
+
 
 #helper imports to preprocess text for model
-import re 
-from gensim.parsing.preprocessing import remove_stopwords #to remove common words
-from nltk.stem import WordNetLemmatizer
 
-lemmatizer = WordNetLemmatizer()
-
-REPLACE_BY_SPACE_RE = re.compile('[/(){}\[\]\|@,;]')
-remove_chars=re.compile('/[!@#$%^&*]/g')
-def clean_text(text: str) -> str:
-    """
-        text: a string
-        
-        return: modified initial string with non ascii characters, other special characters and stop words removed.
-        Words are also converted to lower case and lemmatized.
-    """
-    text = text.lower() # lowercase text
-    text = REPLACE_BY_SPACE_RE.sub(' ', text) # replace REPLACE_BY_SPACE_RE symbols by space in text. substitute the matched string in REPLACE_BY_SPACE_RE with space.
-    text=remove_chars.sub(" ", text)
-    text = remove_stopwords(text)
-    return text
-    
-
-def remove_non_ascii(string: str) -> str:
-    return ''.join(char for char in string if ord(char) < 128)
-#model=load_model("saved_model/model1")#load saved model
-
+@st.cache  #to increase performance
+def load_model():
+    model=load_model("saved_model/model1")#load saved model
+    return model
 
 #######################################################
 #ui code begins here
@@ -42,11 +22,19 @@ with st.form(key='my_form'):
     button=st.form_submit_button('Classify this Review')
     
     if text and button:
+        #process text
         text=clean_text(text)
         text=remove_non_ascii(text)
-        output_from_model="some output"
-        st.write(f"{text}")
+     
+        #feed into model
+        model_output= model.predict(text)
 
-prediction_lables={"Bad": 1, "Mediocre":2 ,"Satisfactory":3, "Good":4}
+        #decode results and display them on page
+        results= decode_output(model_output)
+        st.write(f"{results}")
+
+
+
+
 
 
