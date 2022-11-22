@@ -4,7 +4,7 @@ This will become a machine learning project on natural language processing (NLP)
 The dataset (contained in raw_data.csv)using the scrape.py script  was scraped off of the internet and is a collection of the most recent reviews for an unnamed company.
 These reviews were scraped using the scrape.py script. 
 
-the structure of the files in the project is teh following:
+the structure of the files in the project is the following:
 
 * /data contains all the data in forms of csv files in all its different stages of processing
 
@@ -20,3 +20,7 @@ the structure of the files in the project is teh following:
 
 * frontend.py serves the streamlit web app with which the user can interact with the model
 ./streamlit/config.toml contains the styling configurations of the application of the frontend streamlit app.
+
+
+The deployment branch contains only the scripts required to run the web application live on streamlit which viewers can check out [here]("https://beatrix-droid-broadband-reviews-nlp-frontend-deployment-mmuqk0.streamlit.app/").
+This means that only the saved model, frontend.py and helper.py along with the requirements.txt and the README.md are present in that branch.
