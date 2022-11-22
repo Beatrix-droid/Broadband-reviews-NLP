@@ -1,4 +1,7 @@
 # A Machine Learning Project on NLP
+
+https://beatrix-droid-broadband-reviews-nlp-frontend-deployment-mmuqk0.streamlit.app/ 
+
 This will become a machine learning project on natural language processing (NLP). The Idea is that given a set of reviews, both positive and negative from customers, build a model that can predict the average scores of the review.
 
 The dataset (contained in raw_data.csv)using the scrape.py script  was scraped off of the internet and is a collection of the most recent reviews for an unnamed company.
