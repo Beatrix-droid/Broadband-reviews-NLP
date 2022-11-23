@@ -10,7 +10,7 @@ lemmatizer = WordNetLemmatizer()
 
 REPLACE_BY_SPACE_RE = re.compile('[/(){}\[\]\|@,;]')
 remove_chars=re.compile('/[!@#$%^&*]/g')
-lables={"Bad": 1, "Mediocre":2 ,"Satisfactory":3, "Good":4}
+lables={"Bad": 1.0, "Mediocre":2.0 ,"Satisfactory":3.0, "Good":3.5}
 class_names = list(lables.keys())
 
 #max words to be used.
