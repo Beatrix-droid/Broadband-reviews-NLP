@@ -16,7 +16,7 @@ def grab_model():
 st.title("Review Classifier Model")
 
 st.info("""Welcome to the broadband review classifier! Please enter the review you wish to classify.
-        The model will give it a rating out of 4  where 1 is bad and 4 is good.""")
+        The model will give it a rating out of "Bad","Mediocre", "Satisfactory" and "Good".""")
 with st.form(key='my_form'):
     text= st.text_area('Enter the review you wish to classify:')
     button=st.form_submit_button('Classify this Review')
