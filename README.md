@@ -1,6 +1,6 @@
 # A Machine Learning Project on NLP
-
-https://beatrix-droid-broadband-reviews-nlp-frontend-deployment-mmuqk0.streamlit.app/ 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://beatrix-droid-broadband-reviews-nlp-frontend-deployment-mmuqk0.streamlit.app/)
+ 
 
 This will become a machine learning project on natural language processing (NLP). The Idea is that given a set of reviews, both positive and negative from customers, build a model that can predict the average scores of the review.
 
